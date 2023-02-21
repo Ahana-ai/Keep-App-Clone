@@ -7,6 +7,10 @@ import Header from "./Header";
 import Note from "./Note";
 
 export default function Keep() {
+  const [note, setNote] = useState({
+    title: "",
+    content: "",
+  });
   const [item, setNewItem] = useState([]);
   const [bool, setBool] = useState(false);
 
@@ -15,7 +19,14 @@ export default function Keep() {
     setNewItem((previous) => {
       console.log(previous);
       console.log(note);
-      if (note.title.trim() !== "" && note.content.trim() !== "")
+      if (note.title.trim() !== "" && note.content.trim() !== "") {
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         return [
           ...previous,
           {
@@ -24,7 +35,10 @@ export default function Keep() {
             id: new Date().getTime(),
           },
         ];
-      else return [...previous];
+      } else {
+        Swal.fire("Fields Empty!");
+        return [...previous];
+      }
     });
 
     console.log(item);
@@ -46,7 +60,7 @@ export default function Keep() {
         if (result.isConfirmed) {
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
           setNewItem(() => {
-            item.filter((val) => {
+            return item.filter((val) => {
               return val.id !== index;
             });
           });
@@ -55,11 +69,20 @@ export default function Keep() {
     }
   };
 
+  const updateItems = (index) => {
+    if (!bool) {
+      item.filter((val) => {
+        if (val.id === index)
+          setNote({ title: val.title, content: val.content });
+      });
+    }
+  };
+
   return (
     <>
       <div className="container ">
         <Header />
-        <CreateNote addNote={addNote} />
+        <CreateNote addNote={addNote} setNote={setNote} note={note} />
 
         <div className="flex flex-wrap">
           {item.map((currVal, index) => {
@@ -71,6 +94,7 @@ export default function Keep() {
                   title={currVal.title}
                   content={currVal.content}
                   delete={deleteNote}
+                  update={updateItems}
                 />
               </>
             );
