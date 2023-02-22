@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import "../index.css";
 import CreateNote from "./CreateNote";
@@ -7,18 +7,23 @@ import Header from "./Header";
 import Note from "./Note";
 
 export default function Keep() {
+  //State for the create box
   const [note, setNote] = useState({
     title: "",
     content: "",
   });
+  //State for the complete array to store all the notes
   const [item, setNewItem] = useState([]);
+  //State to check
   const [bool, setBool] = useState(false);
+  const [editItem, setEditItem] = useState();
+
+  // useEffect(() => {
+  //   console.log(bool);
+  // }, [bool]);
 
   const addNote = (note) => {
-    setBool(false);
     setNewItem((previous) => {
-      console.log(previous);
-      console.log(note);
       if (note.title.trim() !== "" && note.content.trim() !== "") {
         Swal.fire({
           position: "top",
@@ -45,8 +50,6 @@ export default function Keep() {
   };
 
   const deleteNote = (index) => {
-    setBool(true);
-
     if (!bool) {
       Swal.fire({
         title: "Are you sure?",
@@ -66,23 +69,57 @@ export default function Keep() {
           });
         }
       });
+    } else {
+      Swal.fire("Already in update!");
     }
   };
 
   const updateItems = (index) => {
-    if (!bool) {
-      item.filter((val) => {
-        if (val.id === index)
-          setNote({ title: val.title, content: val.content });
-      });
-    }
+    setBool(true);
+    item.filter((val) => {
+      if (val.id === index) {
+        setNote({ title: val.title, content: val.content });
+        setEditItem(index);
+      }
+    });
+  };
+
+  const updateNote = () => {
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setNewItem(() => {
+          return item.filter((val) => {
+            if (val.id === editItem) {
+              val.title = note.title;
+              val.content = note.content;
+            }
+            return val.id !== null;
+          });
+        });
+        Swal.fire("Saved!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+
+    setBool(false);
   };
 
   return (
     <>
       <div className="container ">
         <Header />
-        <CreateNote addNote={addNote} setNote={setNote} note={note} />
+        <CreateNote
+          addNote={bool ? updateNote : addNote}
+          setNote={setNote}
+          note={note}
+        />
 
         <div className="flex flex-wrap">
           {item.map((currVal, index) => {

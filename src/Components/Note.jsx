@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
 import "../index.css";
 
 export default function Note(props) {
@@ -13,16 +13,18 @@ export default function Note(props) {
         </div>
         <hr />
         <div className="px-6 pt-4 pb-2 normal-case">
-          <p className="h-auto max-w-xs text-left">
-            {props.content}
-          </p>
+          <p className="h-auto max-w-xs text-left">{props.content}</p>
           <div className="pl-16">
-            <Button onClick={() => {
-              return props.update(props.id);
-            }}>
-              <EditIcon/>
+            <Button
+              className="btnEdit"
+              onClick={() => {
+                return props.update(props.id);
+              }}
+            >
+              <EditIcon />
             </Button>
             <Button
+              className="btnDel"
               onClick={() => {
                 return props.delete(props.id);
               }}

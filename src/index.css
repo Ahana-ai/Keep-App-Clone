@@ -9,3 +9,22 @@ input {
 textarea {
     outline: 0;
 }
+
+.btnDel {
+    border-radius: 40% !important;
+    background-color: rgb(247, 59, 59) !important;
+    color: aliceblue !important;
+}
+
+.btnEdit {
+    border-radius: 45% !important;
+    background-color: rgb(17, 136, 6) !important;
+    color: aliceblue !important;
+    margin-right: 5px !important;
+}
+
+.btnAdd {
+    border-radius: 45% !important;
+    background-color: rgb(24, 159, 31) !important;
+    color: aliceblue !important;
+}
