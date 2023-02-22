@@ -7,20 +7,29 @@ import Header from "./Header";
 import Note from "./Note";
 
 export default function Keep() {
+  //Function to fetch the local storage
+  const getItem = () => {
+    let list = localStorage.getItem("Notes");
+
+    if (list) return JSON.parse(localStorage.getItem("Notes"));
+    else return [];
+  };
+
   //State for the create box
   const [note, setNote] = useState({
     title: "",
     content: "",
   });
   //State for the complete array to store all the notes
-  const [item, setNewItem] = useState([]);
+  const [item, setNewItem] = useState(getItem());
   //State to check
   const [bool, setBool] = useState(false);
   const [editItem, setEditItem] = useState();
 
-  // useEffect(() => {
-  //   console.log(bool);
-  // }, [bool]);
+
+  useEffect(() => {
+    localStorage.setItem("Notes", JSON.stringify(item));
+  }, [item]);
 
   const addNote = (note) => {
     setNewItem((previous) => {
