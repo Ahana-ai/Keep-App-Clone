@@ -7,7 +7,7 @@ import "../index.css";
 export default function Note(props) {
   return (
     <>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg bg-slate-100 shadow-slate-700 m-5">
+      <div className="box-note max-w-sm rounded overflow-hidden shadow-lg bg-slate-100 shadow-slate-700 m-5">
         <div className="px-6 py-4 text-ellipsis font-bold uppercase">
           <h2>{props.title}</h2>
         </div>

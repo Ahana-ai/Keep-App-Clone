@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <>
-    <footer>
+    <footer className='label-text'>
       <p> copyright © {year} </p>
     </footer>
     </>

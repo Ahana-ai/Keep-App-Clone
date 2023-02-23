@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
-import Swal from "sweetalert2";
+import RefreshIcon from '@mui/icons-material/Refresh';
 import "../index.css";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -29,7 +29,7 @@ export default function CreateNote(props) {
   return (
     <>
       <div
-        className="max-w-sm rounded overflow-hidden shadow-lg mx-auto mt-10 shadow-slate-700 "
+        className="box max-w-sm rounded overflow-hidden shadow-lg mx-auto mt-10 shadow-slate-700 "
         onDoubleClick={() => {
           setExpand(false);
         }}
@@ -67,6 +67,9 @@ export default function CreateNote(props) {
           <div className="pl-16">
             <Button className="btnAdd" onClick={newNote}>
               <AddIcon />
+            </Button>
+            <Button className="btnRef" onClick={() => {return props.refresh()}}>
+              <RefreshIcon />
             </Button>
           </div>
         ) : null}

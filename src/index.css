@@ -3,29 +3,87 @@
 @tailwind utilities;
 
 input {
-    outline: 0;
+  outline: 0;
+  background-color: var(--create-box-bg-colour);
 }
 
 textarea {
-    outline: 0;
+  outline: 0;
+  background-color: var(--create-box-bg-colour);
+}
+
+.label-text {
+    color: var(--label-text-colour);
+}
+
+.heading {
+  color: var(--heading-colour);
+  text-shadow: 1px 1px black;
+}
+
+.box {
+  background-color: var(--create-box-bg-colour);
+  color: var(--text-colour);
+}
+
+.box ::placeholder {
+    color: var(--text-colour);
+}
+
+.box-note {
+    background-color: var(--note-bg-colour);
+    color: var(--note-text-color);
 }
 
 .btnDel {
-    border-radius: 40% !important;
-    background-color: rgb(247, 59, 59) !important;
-    color: aliceblue !important;
+  border-radius: 40% !important;
+  background-color: var(--btn-bg-colour) !important;
+  color: var(--btn-colour) !important;
 }
 
 .btnEdit {
-    border-radius: 45% !important;
-    background-color: rgb(17, 136, 6) !important;
-    color: aliceblue !important;
-    margin-right: 5px !important;
+  border-radius: 45% !important;
+  background-color: var(--btn-bg-colour) !important;
+  color: var(--btn-colour) !important;
+  margin-right: var(--default-margin) !important;
 }
 
 .btnAdd {
-    border-radius: 45% !important;
-    background-color: rgb(24, 159, 31) !important;
-    color: aliceblue !important;
-    margin-bottom: 5px !important;
+  border-radius: 45% !important;
+  background-color: var(--btn-bg-colour) !important;
+  color: var(--btn-colour) !important;
+  margin-bottom: var(--default-margin) !important;
+}
+
+.btnRef {
+  border-radius: 45% !important;
+  background-color: var(--btn-bg-colour) !important;
+  color: var(--btn-colour) !important;
+  margin-bottom: var(--default-margin) !important;
+  margin-left: var(--default-margin) !important;
+}
+
+:root {
+  --btn-colour: aliceblue;
+  --btn-bg-colour: rgb(8, 8, 106);
+  --default-margin: 5px;
+  --bg-colour: white;
+  --text-colour: black;
+  background-color: aliceblue !important;
+  --heading-colour: rgb(9, 9, 9);
+  --label-text-colour : black;
+  --note-bg-colour: aliceblue;
+  --note-text-color: black;
+}
+
+.dark {
+  --btn-colour: rgb(5, 32, 60);
+  --btn-bg-colour: rgb(231, 231, 234);
+  --create-box-bg-colour: rgb(90, 92, 152);
+  --text-colour: rgb(229, 225, 225);
+  background-color: rgb(15, 15, 30);
+  --heading-colour: rgb(219, 229, 15);
+  --label-text-colour: white;
+  --note-bg-colour: rgb(119, 121, 159);
+  --note-text-color: rgb(7, 7, 7);
 }
