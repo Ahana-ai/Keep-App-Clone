@@ -105,6 +105,11 @@ export default function Keep() {
             });
           });
           Swal.fire("Saved!", "", "success");
+          setNote({
+            title: "",
+            content: "",
+          });
+          setBool(false);
         } else if (result.isDenied) {
           Swal.fire("Changes are not saved", "", "info");
         }
@@ -159,9 +164,6 @@ export default function Keep() {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          if (bool) {
-            deleteNote(editItem);
-          }
           setNote({
             title: "",
             content: "",
